@@ -21,7 +21,7 @@
  * Inside a course it shows quests for that course only.
  *
  * @package    block_ace_quests
- * @copyright  2026 LetStudy Group
+ * @copyright  2026 Letstudy Group
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -32,7 +32,7 @@
  * on course pages and the user dashboard.
  *
  * @package    block_ace_quests
- * @copyright  2026 LetStudy Group
+ * @copyright  2026 Letstudy Group
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class block_ace_quests extends block_base {

@@ -18,7 +18,7 @@
  * English language strings for block_ace_quests.
  *
  * @package    block_ace_quests
- * @copyright  2026 LetStudy Group
+ * @copyright  2026 Letstudy Group
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
