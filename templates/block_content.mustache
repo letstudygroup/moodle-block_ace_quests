@@ -1,0 +1,111 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template block_ace_quests/block_content
+
+    Block content template for the My Quests block.
+
+    Context variables:
+    * issitecontext - Whether we are on the site dashboard
+    * quests - Array of quest card data (course mode)
+    * hasquests - Whether there are quests (course mode)
+    * xp - Total XP for the course (course mode)
+    * level - Current level (course mode)
+    * courses - Array of course objects with quests (site mode)
+    * hascourses - Whether there are courses with quests (site mode)
+    * totalxp - Total XP across all courses (site mode)
+    * totalquests - Total active quests (site mode)
+}}
+<div class="block-ace-quests-content">
+
+    {{! ===== SITE DASHBOARD MODE ===== }}
+    {{#issitecontext}}
+        {{#hascourses}}
+            {{! Summary }}
+            <div class="d-flex justify-content-between mb-3 small">
+                <span class="badge bg-warning text-dark">{{totalxp}} XP</span>
+                <span class="text-muted">{{totalquests}} {{#str}}activequests, local_ace{{/str}}</span>
+            </div>
+
+            {{! Course sections }}
+            {{#courses}}
+                <div class="mb-3">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <a href="{{courseurl}}" class="fw-bold text-truncate small" title="{{coursename}}">
+                            {{coursename}}
+                        </a>
+                        <span class="badge bg-info ms-1">Lv.{{level}}</span>
+                    </div>
+                    {{#quests}}
+                        <div class="d-flex align-items-center justify-content-between py-1 border-bottom">
+                            <div class="text-truncate me-2 small">
+                                <span class="badge bg-secondary rounded-pill me-1 ace-quest-type-badge">{{questtypelabel}}</span>
+                                {{#hasactivityurl}}
+                                    <a href="{{activityurl}}" class="text-body">{{title}}</a>
+                                {{/hasactivityurl}}
+                                {{^hasactivityurl}}
+                                    {{title}}
+                                {{/hasactivityurl}}
+                            </div>
+                            <span class="badge bg-warning text-dark rounded-pill ace-quest-xp-badge">+{{xpreward}}</span>
+                        </div>
+                    {{/quests}}
+                </div>
+            {{/courses}}
+        {{/hascourses}}
+
+        {{^hascourses}}
+            <p class="text-muted text-center small mb-0">
+                {{#str}}noquests, block_ace_quests{{/str}}
+            </p>
+        {{/hascourses}}
+    {{/issitecontext}}
+
+    {{! ===== COURSE MODE ===== }}
+    {{^issitecontext}}
+        {{#hasquests}}
+            {{! XP/Level summary }}
+            <div class="d-flex justify-content-between mb-3 small">
+                <span class="badge bg-warning text-dark">{{xp}} XP</span>
+                <span class="badge bg-info">Lv.{{level}}</span>
+            </div>
+
+            {{! Quest list }}
+            {{#quests}}
+                <div class="d-flex align-items-center justify-content-between py-1 border-bottom">
+                    <div class="text-truncate me-2 small">
+                        <span class="badge bg-secondary rounded-pill me-1 ace-quest-type-badge">{{questtypelabel}}</span>
+                        {{#hasactivityurl}}
+                            <a href="{{activityurl}}" class="text-body">{{title}}</a>
+                        {{/hasactivityurl}}
+                        {{^hasactivityurl}}
+                            {{title}}
+                        {{/hasactivityurl}}
+                    </div>
+                    <span class="badge bg-warning text-dark rounded-pill ace-quest-xp-badge">+{{xpreward}}</span>
+                </div>
+            {{/quests}}
+        {{/hasquests}}
+
+        {{^hasquests}}
+            <p class="text-muted text-center small mb-0">
+                {{#str}}noquests, block_ace_quests{{/str}}
+            </p>
+        {{/hasquests}}
+    {{/issitecontext}}
+
+</div>

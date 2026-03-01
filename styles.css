@@ -1,0 +1,8 @@
+/* Block ACE Quests styles. */
+.block-ace-quests-content .ace-quest-type-badge {
+    font-size: 0.65rem;
+}
+
+.block-ace-quests-content .ace-quest-xp-badge {
+    font-size: 0.7rem;
+}
