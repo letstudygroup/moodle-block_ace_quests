@@ -22,6 +22,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die();
+
 $string['ace_quests:addinstance'] = 'Add My Quests block';
 $string['ace_quests:myaddinstance'] = 'Add My Quests to Dashboard';
 $string['noquests'] = 'No active quests. Check back tomorrow!';
