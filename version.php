@@ -30,5 +30,5 @@ $plugin->component = 'block_ace_quests';
 $plugin->maturity  = MATURITY_STABLE;
 $plugin->release   = '1.0.0';
 $plugin->dependencies = [
-    'local_ace' => 2026022208,
+    'local_aceengineengine' => 2026022208,
 ];

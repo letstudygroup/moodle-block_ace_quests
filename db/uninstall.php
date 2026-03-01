@@ -18,7 +18,7 @@
  * Uninstall handler for block_ace_quests.
  *
  * Part of the ACE plugin family. This block displays active quests
- * and depends on the local_ace plugin for all data.
+ * and depends on the local_aceengine plugin for all data.
  *
  * @package    block_ace_quests
  * @copyright  2026 Letstudy Group

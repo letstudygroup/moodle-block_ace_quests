@@ -28,7 +28,7 @@
 /**
  * ACE quests block.
  *
- * Displays active quests for the user from the local_ace plugin
+ * Displays active quests for the user from the local_aceengine plugin
  * on course pages and the user dashboard.
  *
  * @package    block_ace_quests
@@ -94,7 +94,7 @@ class block_ace_quests extends block_base {
             return $this->content;
         }
 
-        if (!get_config('local_ace', 'enableplugin')) {
+        if (!get_config('local_aceengine', 'enableplugin')) {
             return $this->content;
         }
 
@@ -112,7 +112,7 @@ class block_ace_quests extends block_base {
                 ['class' => 'btn btn-outline-primary btn-sm btn-block mt-2']
             );
         } else {
-            if (!local_ace_is_enabled_for_course($courseid)) {
+            if (!local_aceengine_is_enabled_for_course($courseid)) {
                 return $this->content;
             }
             $data = $this->get_single_course_data($userid, $courseid);
@@ -141,20 +141,20 @@ class block_ace_quests extends block_base {
     private function get_single_course_data(int $userid, int $courseid): array {
         global $DB;
 
-        $activequests = $DB->get_records('local_ace_quests', [
+        $activequests = $DB->get_records('local_aceengine_quests', [
             'userid' => $userid,
             'courseid' => $courseid,
             'status' => 'active',
         ], 'timecreated DESC');
 
-        $renderer = $this->page->get_renderer('local_ace');
+        $renderer = $this->page->get_renderer('local_aceengine');
         $questcards = [];
         foreach ($activequests as $quest) {
-            $card = new \local_ace\output\quest_card($quest);
+            $card = new \local_aceengine\output\quest_card($quest);
             $questcards[] = $card->export_for_template($renderer);
         }
 
-        $xprecord = $DB->get_record('local_ace_xp', [
+        $xprecord = $DB->get_record('local_aceengine_xp', [
             'userid' => $userid,
             'courseid' => $courseid,
         ]);
@@ -180,7 +180,7 @@ class block_ace_quests extends block_base {
         global $DB;
 
         $enrolledcourses = enrol_get_users_courses($userid, true, 'id, fullname, shortname');
-        $renderer = $this->page->get_renderer('local_ace');
+        $renderer = $this->page->get_renderer('local_aceengine');
 
         $courses = [];
         $totalxp = 0;
@@ -190,11 +190,11 @@ class block_ace_quests extends block_base {
             if ($course->id == SITEID) {
                 continue;
             }
-            if (!local_ace_is_enabled_for_course($course->id)) {
+            if (!local_aceengine_is_enabled_for_course($course->id)) {
                 continue;
             }
 
-            $activequests = $DB->get_records('local_ace_quests', [
+            $activequests = $DB->get_records('local_aceengine_quests', [
                 'userid' => $userid,
                 'courseid' => $course->id,
                 'status' => 'active',
@@ -206,11 +206,11 @@ class block_ace_quests extends block_base {
 
             $questcards = [];
             foreach ($activequests as $quest) {
-                $card = new \local_ace\output\quest_card($quest);
+                $card = new \local_aceengine\output\quest_card($quest);
                 $questcards[] = $card->export_for_template($renderer);
             }
 
-            $xprecord = $DB->get_record('local_ace_xp', [
+            $xprecord = $DB->get_record('local_aceengine_xp', [
                 'userid' => $userid,
                 'courseid' => $course->id,
             ]);
